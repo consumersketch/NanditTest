@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{# form to submit selectted client value #}
+	<form id="ajaxform" action="/product_invoice">
+		<select id="client_id" name="client_id">
+			<option value="">---Select Client---</option>
+			{% for client in clients %}
+			<option value="{{ client.clientId }}">{{ client.clientId }}</option>
+			{% endfor %}
+		</select>
+  		<input type="button" id="submit" value="Submit">
+	</form> 
+<div id="result">
+
+	{# table to display listing of invoices data #}
+	<table border="1">
+		<tr>
+			<td>Client Id</td>
+			<td>Invoice Num</td>
+			<td>Invoice Date</td>
+			<td>Qty</td>
+			<td>Price</td>
+		</tr>
+		{% for invoiveData in clientInvoicesArray %}
+                {% for singleinvoive in invoiveData %}
+				<tr>
+					<td>{{ singleinvoive.client_id }}</td>
+					<td>{{ singleinvoive.invoice_num }}</td>
+					<td>{{ singleinvoive.invoice_date }}</td>
+					<td>{{ singleinvoive.qty }}</td>
+					<td>{{ singleinvoive.price }}</td>
+				</tr>	
+				{% endfor%}
+        {% endfor %}
+	</table>
+</div>
+{% endblock %}
+
+			

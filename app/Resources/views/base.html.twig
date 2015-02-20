@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+		{% block body %}{% endblock %}
+        {% block javascripts %}
+			<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+			<script type="text/javascript">
+			
+				
+					$("#submit").click(function(){
+						var postData = "text";
+						var client_id = $("#client_id").val();
+						
+						$.ajax({
+							type: "POST",
+							url: "http://localhost:8000/product_invoiceajax?",
+							data: "client_id=" + client_id,
+							
+							success: function(responseData) {
+								
+								$("#result").html(responseData);
+							},
+							error: function(xhr, status, error) {
+								alert(xhr.responseText);
+							}
+						});
+					});
+				
+			</script>
+		{% endblock %}
+    </body>
+</html>
